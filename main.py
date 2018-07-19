@@ -6,6 +6,11 @@ Created on Mon Jul  2 15:42:00 2018
 @author: qpetit
 """
 
+from sys import platform as sys_pf
+if sys_pf == 'darwin':
+    import matplotlib
+    matplotlib.use("tkAgg")
+
 import numpy as np
 
 import sys
