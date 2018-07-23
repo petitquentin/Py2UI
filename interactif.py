@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import sys
 if sys.version_info[0] < 3:
     import Tkinter as Tk
@@ -19,7 +21,9 @@ from matplotlib.figure import Figure
 
 from get_path import read_file_path
 
+#Fonction qui affiche le graphique demandé dans la mee fenêtre (dans la partie droite de la fenêtre)
 def display_graph_ext(dimension, b=False):
+
     root = Tk.Tk()
     root.wm_title("SMG2S UI")
     
@@ -100,7 +104,8 @@ def display_graph_ext(dimension, b=False):
 # the window is closed with the window manager.
     
     
-    
+
+#Fonction qui affiche le graphique demandé dans la mee fenêtre (dans la partie droite de la fenêtre)
 def display_graph_int(dimension, root, canvas, b=False):
     
     for w in root.winfo_children():

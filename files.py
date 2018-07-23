@@ -21,20 +21,24 @@ import numpy as np
 from get_path import read_file_path
 from graph import generate_graph
 
+#Fonction qui permet la sauvegarde du graphique là ou l'utilisateur le veut
 def save_file(b):
     try:
         fichier = filedialog.asksaveasfilename(filetypes=[("Portable Network Graphics", "*.png"),("Encapsulated Postcript", "*.eps"),("Portable Document Format", "*.pdf"),("Scalable Vector Graphics", "*.svg,*,svgz"),("Joint Photographic Experts Group", "*.jpeg,*.jpg"),("PGF code for LaTeX", "*.pgf"),("Raw RGBA bitmap", "*.raw,*.rgba"),("Postscript", "*.ps")])
     except FileNotFoundError:
-        messagebox.showerror("eroor", "problem with file path, the image has not been saved")
+        messagebox.showerror("error", "Problem with file path, the image has not been saved")
         return
-    dimension = read_files()
-    if dimension < 1 :
-        return
-    graphique = generate_graph(dimension, fichier, b)
-    if graphique != True :
-        messagebox.showerror("Error","Can not display the graphic")
     
-
+    #Si l'utilisateur a sélecxtionné un chemin
+    if fichier != "" :
+        dimension = read_files()
+        if dimension < 1 :
+            return
+        graphique = generate_graph(dimension, fichier, b)
+        if graphique != True :
+            messagebox.showerror("Error","Can not display the graphic")
+    
+#Fonction qui permet la lecture des fichiers .txt de données
 def read_files():
     #On ouvre le fichier 1
     fichier1 = read_file_path(1)
@@ -74,7 +78,8 @@ def read_files():
                                 imaginaire1.append(Decimal(donnees[2]))
                             else:
                                 imaginaire1.append(0)
-            f.close()      
+            f.close()    
+            #On sauvegarde les données
             np.savetxt(r'data/matrix/r1.vec', reel1)
             np.savetxt(r'data/matrix/i1.vec', imaginaire1)
         else:      
@@ -108,11 +113,14 @@ def read_files():
                                 imaginaire2.append(Decimal(donnees[2]))
                             else:
                                 imaginaire2.append(0)
-            f.close()                    
+            f.close()
+            #On sauvegarde les données
             np.savetxt(r'data/matrix/r2.vec', reel2)
             np.savetxt(r'data/matrix/i2.vec', imaginaire2)
         else:  
             presence_fichier2 = False
+        
+        #on va vérifier que les deux fichiers sont de la même taille
         if presence_fichier1 == presence_fichier2 == True :
             if ancienne_dimension != dimension :
                 messagebox.showwarning("Error","The selected files are not the same size. Please check the files") 
@@ -125,28 +133,19 @@ def read_files():
 
 def open_file(number):
     
+    #On charge les chemins déjà présent
     if number == 1 :
         fichier = read_file_path(1)
-        autre_fichier = read_file_path(2)
     else:
         fichier = read_file_path(2)
-        autre_fichier = read_file_path(1)
     #On enregistre ce que contient l'adresse du fichier précédente
     fichier_precedent = fichier
     
     #On demande à l'utilisateur de choisir son fichier texte
     fichier = filedialog.askopenfilename(filetypes=[('Text file','.txt')])
+    
     #Si le fichier choisi est différent du fichier précédent alors le graphique n'est plus valable, on va donc pouvoir en refaire un et mettre à jour l'affichage.
     if fichier_precedent != fichier :
         file = open("data/files/file"+str(number)+".txt", "w")
         file.write(fichier)
-#    if autre_fichier == "" and fichier != "" and number == 1:
-#        answer = messagebox.askyesno("Open final file","Do you want to open the final file now?")
-#        if answer == True:
-#            open_file(2)
-#    elif autre_fichier == "" and fichier != "" and number == 2:
-#        print("autrefichier : ", autre_fichier, " fichier : ", fichier, "number : ", number)
-#        answer = messagebox.askyesno("Open original file","Do you want to open the original file now?")
-#        if answer == True:
-#            open_file(1)
     

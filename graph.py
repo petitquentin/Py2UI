@@ -45,6 +45,7 @@ def generate_graph(dimension, fichier, b=False):
     axe = plt.figure(1, figsize=(w, h))
     a = plt.subplot(1, 1, 1)
     
+    
     if dimension == 2:
         if fichier1 != "":
             plt.scatter(reel1, imaginaire1, c = 'black', marker = 'o', s = 200, label="Original solution")
@@ -64,6 +65,8 @@ def generate_graph(dimension, fichier, b=False):
     else: 
         messagebox.showerror("Error", "Impossible to generate the graph, the dimension is incorrect")
         graphique = False
+        
+    #Si tout est ok pour l'enregistrement, on savegarde le graphique
     if graphique == True :
         if b == True:
             u = np.loadtxt(r'data/custom/axe.vec')
