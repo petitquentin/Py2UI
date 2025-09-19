@@ -12,7 +12,8 @@ matplotlib.use("tkAgg")
 from matplotlib.pyplot import scatter, legend, savefig, show, xlim, ylim
 
 from numpy import loadtxt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+
 # implement the default mpl key bindings
 from matplotlib.backend_bases import key_press_handler
 
